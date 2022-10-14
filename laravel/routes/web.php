@@ -21,3 +21,12 @@ Route::get('/', function () {
    
 
 });
+
+
+
+use App\Http\Controllers\MailController;
+// ...
+Route::get('mail/test', [MailController::class, 'test']);
+// or
+// Route::get('mail/test', 'App\Http\Controllers\MailController@test');
+
