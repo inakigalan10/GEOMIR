@@ -17,6 +17,12 @@ return [
 
     'default' => env('DB_CONNECTION', 'mysql'),
 
+    
+    'options' => extension_loaded('pdo_mysql') ? [
+        PDO::MYSQL_ATTR_SSL_KEY => env('MYSQL_ATTR_SSL_KEY', '/var/lib/mysql/client-key.pem'),
+        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false
+     ] : [],
+     
     /*
     |--------------------------------------------------------------------------
     | Database Connections
