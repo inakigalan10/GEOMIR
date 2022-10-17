@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
+#use Illuminate\Support\Facades\Debugbar;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
     Log::info('Loading welcome page');
-    
+    Debugbar::info('Loading welcome page');   
     return view('welcome');
    
 
