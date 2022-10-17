@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Log;
-#use Illuminate\Support\Facades\Debugbar;
-
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,18 +15,14 @@ use Illuminate\Support\Facades\Log;
 */
 
 Route::get('/', function () {
-    Log::info('Loading welcome page');
-    Debugbar::info('Loading welcome page');   
     return view('welcome');
-   
-
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-
-use App\Http\Controllers\MailController;
 // ...
-Route::get('mail/test', [MailController::class, 'test']);
-// or
-// Route::get('mail/test', 'App\Http\Controllers\MailController@test');
 
+
+require __DIR__.'/auth.php';
