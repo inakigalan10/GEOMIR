@@ -16,9 +16,9 @@
     </div>
 
     @section('content')
-        <h2>Resources</h2>
+        <h2>{{ __('Resources') }}</h2>
         <ul>
-            <li><a  href="{{ url('/files') }}">Files</a></li>
+            <li><a  href="{{ url('/files') }}">{{ __('Files')}}</a></li>
         </ul>
     @endsection
 

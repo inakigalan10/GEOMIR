@@ -17,6 +17,7 @@ class FileController extends Controller
         return view("files.index", [
             "files" => File::all()
         ]);
+        
     }
  
 
@@ -88,7 +89,10 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        //
+        return view("files.show", [
+            'file' => $file
+            
+        ]);
     }
 
     /**

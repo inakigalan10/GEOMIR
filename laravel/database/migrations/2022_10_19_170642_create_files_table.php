@@ -14,12 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('files', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->autoincrement();
-            $table->primary('id');
+            $table->id();
             $table->string('filepath');
             $table->Integer('filesize');
-            $table->timestamp('created_at');
-            $table->timestamp('update_at');
+            $table->timestamps();
       
         });
     }

@@ -15,6 +15,7 @@
                                <td scope="col">Filesize</td>
                                <td scope="col">Created</td>
                                <td scope="col">Updated</td>
+                               <td scope="col">show</td>
                            </tr>
                        </thead>
                        <tbody>
@@ -25,6 +26,7 @@
                                <td>{{ $file->filesize }}</td>
                                <td>{{ $file->created_at }}</td>
                                <td>{{ $file->updated_at }}</td>
+                               <td><a class="btn btn-primary" href="{{ route('files.show', $file) }}"role="button">show</a></td>
                            </tr>
                            @endforeach
                        </tbody>
