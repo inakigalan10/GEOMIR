@@ -14,4 +14,12 @@
             </div>
         </div>
     </div>
+
+    @section('content')
+        <h2>Resources</h2>
+        <ul>
+            <li><a  href="{{ url('/files') }}">Files</a></li>
+        </ul>
+    @endsection
+
 </x-app-layout>

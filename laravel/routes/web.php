@@ -17,7 +17,10 @@ use App\Http\Controllers\FileController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+    $message = 'Loading welcome page';
+    Log::info($message);
+    $request->session()->flash('info', $message);
     return view('welcome');
 });
 
@@ -25,13 +28,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', function (Request $request) {
-    $message = 'Loading welcome page';
-    Log::info($message);
-    $request->session()->flash('info', $message);
-    return view('welcome');
- });
-
+Route::get('mail/test', [MailController::class, 'test']);
  
 Route::resource('files', FileController::class);
 
