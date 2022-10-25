@@ -32,9 +32,16 @@
                                 <td> <img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" /></td> 
                            </tr>
                            <tr>
-                               <td><a class="btn btn-primary" href="" role="button">Upadte</a></td>
-                               <td><a class="btn btn-primary" href="" role="button">Delete</a></td>
-                               <td><a class="btn btn-primary" href="" role="button">Index</a></td>
+                               <td><a class="btn btn-primary" href="{{ route('files.edit',$file) }}" role="button">Upadte</a></td>
+                            
+                               <td>
+                                   <form method="post" action="" enctype="multipart/form-data">
+                                       @method('DELETE')
+                                       <button type="submit" class="btn btn-primary">Delete</button>
+                                    </form>
+                                   <a class="btn btn-primary" href="{{ url('/files') }}" role="button">Index</a>
+                                    
+                                </td>
                            </tr>
                           
 
