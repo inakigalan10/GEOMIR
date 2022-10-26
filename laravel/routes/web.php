@@ -32,9 +32,10 @@ Route::get('mail/test', [MailController::class, 'test']);
  
 Route::resource('files', FileController::class);
 
-Route::resource('files', FileController::class)
-->middleware(['auth', 'role:2']);
 
+
+Route::resource('files', FileController::class)
+        ->middleware(['auth', 'role.any:3,2']);
 
 // ...
 
