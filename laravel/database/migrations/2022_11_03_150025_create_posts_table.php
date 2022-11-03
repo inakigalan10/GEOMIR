@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('body:', 255);
 
@@ -22,9 +22,7 @@ return new class extends Migration
 
             $table ->float('latitude');
             $table ->float('longitude');
-
-            //$table->unsignedBigInteger('visibility_id:');
-
+            
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users');
 

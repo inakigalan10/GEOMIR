@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\PostController;
 
 
 /*
@@ -32,6 +33,7 @@ Route::get('mail/test', [MailController::class, 'test']);
  
 Route::resource('files', FileController::class);
 
+Route::resource('post', PostController::class);
 
 
 Route::resource('files', FileController::class)
