@@ -38,8 +38,8 @@ Route::resource('post', PostController::class);
 
 Route::resource('files', FileController::class)
         ->middleware(['auth', 'role.any:3,2']);
-        
-Route::resource('places', PlaceController::class)
+
+Route::resource('places', PostController::class)
         ->middleware(['auth', 'role.any:3,2']);
 
 // ...
