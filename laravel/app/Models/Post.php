@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+    public function file()
+        {
+        return $this->hasOne(File::class);
+        }
+    public function user()
+        {
+        // foreign key does not follow conventions!!!
+        return $this->belongsTo(User::class, 'author_id');
+        }
+
+
 }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('body:', 255);
+            $table->string('body', 255);
 
             $table->unsignedBigInteger('file_id');
             $table->foreign('file_id')->references('id')->on('files');

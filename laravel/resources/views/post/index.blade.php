@@ -15,8 +15,8 @@
                                <td scope="col">file_id</td>
                                <td scope="col">latitude</td>
                                <td scope="col">longitude</td>
-                               <td scope="col">author_id</td>
-                               <td scope="col">crated_at</td>
+                               <td scope="col">author id</td>
+                               <td scope="col">created at</td>
                            </tr>
                        </thead>
                        <tbody>
@@ -28,13 +28,13 @@
                                <td>{{ $post->latitude }}</td>
                                <td>{{ $post->longitude }}</td>
                                <td>{{ $post->author_id }}</td>
-                               <td>{{ $post->crated_at }}</td>
-                               <td><a class="btn btn-primary" href=""role="button">show</a></td>
+                               <td>{{ $post->created_at }}</td>
+                               <td><a class="btn btn-primary" href="{{ route ('post.show', $post)}}"role="button">show</a></td>
                            </tr>
                            @endforeach
                        </tbody>
                    </table>
-                   <a class="btn btn-primary" href="" role="button">Add new post</a>
+                   <a class="btn btn-primary" href="{{ route('post.create') }}" role="button">Add new post</a>
                </div>
            </div>
        </div>
