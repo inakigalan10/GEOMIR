@@ -32,6 +32,22 @@
                                 <td>{{ $place->updated_at }}</td> 
                            </tr>
                            <tr>
+                                <td scope="col">Latitude:</td>
+                                <td>{{ $place->latitude }}</td> 
+                           </tr>
+                           <tr>
+                                <td scope="col">Longitude:</td>
+                                <td>{{ $place->longitude }}</td> 
+                           </tr>
+                           <tr>
+                                <td scope="col">Category_id:</td>
+                                <td>{{ $place->category_id }}</td> 
+                           </tr>
+                           <tr>
+                                <td scope="col">Visibility_id:</td>
+                                <td>{{ $place->visibility_id }}</td> 
+                           </tr>
+                           <tr>
                                 <td scope="col">img:</td>
                                 <td> <img class="img-fluid" src="{{ asset('storage/{$file->filepath}') }}" /></td> 
                            </tr>

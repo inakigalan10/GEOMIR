@@ -230,7 +230,7 @@ class PlaceController extends Controller
         \Storage::disk('public')->delete($place->id);
         $place->delete();
 
-        \Storage::disk('public')->delete($place->filepath);
+        \Storage::disk('public')->delete($file->filepath);
         $file->delete();
 
          if (\Storage::disk('public')->exists($place->id)) {
