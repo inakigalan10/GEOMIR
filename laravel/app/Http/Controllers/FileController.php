@@ -92,11 +92,10 @@ class FileController extends Controller
     if (\Storage::disk('public')->exists($file -> filepath)) {
         \Log::debug("Local storage OK");
         return view("files.show", [
-            'file' => $file
-            
-        ]);
+            'file' => $file   
+            ]);
+        }
     }
-}
 
     /**
      * Show the form for editing the specified resource.

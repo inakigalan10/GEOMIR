@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
-
+use App\Http\Controllers\PlaceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ Route::get('/dashboard', function () {
 Route::get('mail/test', [MailController::class, 'test']);
  
 Route::resource('files', FileController::class);
-
+Route::resource('places', PlaceController::class);
 
 
 Route::resource('files', FileController::class)
