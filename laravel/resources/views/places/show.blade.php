@@ -49,7 +49,7 @@
                            </tr>
                            <tr>
                                 <td scope="col">img:</td>
-                                <td> <img class="img-fluid" src="{{ asset('storage/{$file->filepath}') }}" /></td> 
+                                <td> <img class="img-fluid" src="{{ asset('storage/' . $place->file->filepath) }}" /></td> 
                            </tr>
                            <tr>
                                <td>

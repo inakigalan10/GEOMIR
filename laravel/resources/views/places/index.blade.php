@@ -34,7 +34,7 @@
                                <td>{{ $place->longitude }}</td>
                                <td>{{ $place->category_id }}</td>
                                <td>{{ $place->visibility_id }}</td>
-                               <td>{{ $place->author_id }}</td>
+                               <td>{{ $place->user->name }}</td>
                                <td>{{ $place->created_at }}</td>
                                <td>{{ $place->updated_at }}</td>
                                <td><a class="btn btn-primary" href="{{ route('places.show', $place) }}"role="button">show</a></td>

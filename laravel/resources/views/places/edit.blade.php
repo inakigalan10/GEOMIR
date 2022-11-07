@@ -14,7 +14,7 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="upload">File:</label>
-                            <input type="file" class="form-control" name="upload" value="{{ asset('storage/{$file->filepath}') }}"/>
+                            <input type="file" class="form-control" name="upload" value="{{ asset('storage/' . $place->file->filepath) }}"/>
                             <label for="name">Name:</label>
                             <input type="txt" class="form-control" name="name" value='{{ $place->name }}' />
                             <label for="description">Description:</label>
