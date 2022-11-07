@@ -5,6 +5,7 @@ use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,14 +30,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('mail/test', [MailController::class, 'test']);
- 
-Route::resource('files', FileController::class);
-Route::resource('places', PlaceController::class);
 
-Route::resource('places', PlaceController::class)
-        ->middleware(['auth', 'role.any:3,2']);
         
 Route::resource('files', FileController::class)
+        ->middleware(['auth', 'role.any:3,2']);
+
+Route::resource('posts', PostController::class)
+        ->middleware(['auth', 'role.any:3,2']);
+
+Route::resource('places', PlaceController::class)
         ->middleware(['auth', 'role.any:3,2']);
 
 // ...
