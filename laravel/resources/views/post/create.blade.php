@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <table class="table">
                         <thead>
-                        <form method="post" action="{{ route('post.store') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                          @csrf
                          <div class="form-group">
                              

@@ -41,8 +41,8 @@
                                        @method('DELETE')
                                        @csrf
                                        <button type="submit" class="btn btn-primary">Delete</button>
-                                       <a class="btn btn-primary" href="{{ route('post.edit',$post) }}" role="button">Upadte</a>
-                                       <a class="btn btn-primary" href="{{ url('/post') }}" role="button">Index</a> 
+                                       <a class="btn btn-primary" href="{{ route('posts.edit',$post) }}" role="button">Upadte</a>
+                                       <a class="btn btn-primary" href="{{ url('/posts') }}" role="button">Index</a> 
                                     </form>
                                     
                                 </td>

@@ -20,7 +20,7 @@
         <ul>
             <li><a  href="{{ url('/files') }}">{{ __('Files')}}</a></li>
             <li><a  href="{{ url('/places') }}">{{ __('Places')}}</a></li>
-            <li><a  href="{{ url('/post') }}">{{ __('Post')}}</a></li>
+            <li><a  href="{{ url('/posts') }}">{{ __('Posts')}}</a></li>
         </ul>
     @endsection
 

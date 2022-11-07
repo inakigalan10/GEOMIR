@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view("posts.index", [
+        return view("post.index", [
             "posts" => Post::all()
         ]);
  
@@ -30,9 +30,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("posts.create");
+        return view("post.create");
 
-    }
+    } 
 
     /**
      * Store a newly created resource in storage.
@@ -107,7 +107,7 @@ class PostController extends Controller
     {
        
         $user=User::find("$post->author_id");
-        return view("posts.show", [
+        return view("post.show", [
             'post' => $post,
             'file' => $post->file(),
             'user' => $user
@@ -123,7 +123,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $file=File::find("$post->file_id");
-        return view("posts.edit", [
+        return view("post.edit", [
             'post' => $post,
             'file' => $file,   
         ]);
@@ -183,12 +183,12 @@ class PostController extends Controller
             \Log::debug("DB storage OK");
 
             // Patró PRG amb missatge d'èxit
-            return redirect()->route('post.index', $post)
+            return redirect()->route('posts.index', $post)
                 ->with('success', 'Post successfully updated');
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
-            return redirect()->route("post.update")
+            return redirect()->route("posts.update")
                 ->with('error', 'ERROR updating Post');
         }
         }
@@ -214,12 +214,12 @@ class PostController extends Controller
          if (\Storage::disk('public')->exists($post->id)) {
             \Log::debug("Local storage OK");
             
-            return redirect()->route('post.show', $post)
+            return redirect()->route('posts.show', $post)
                 ->with('error', 'Error post alredy exist');
         } else {
             \Log::debug("Post Delete");
             // Patró PRG amb missatge d'error
-            return redirect()->route("post.index")
+            return redirect()->route("posts.index")
                 ->with('succes', 'Post Deleted');
         }
     }

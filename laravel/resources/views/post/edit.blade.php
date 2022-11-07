@@ -9,7 +9,7 @@
                <div class="card-body">
                <table class="table">
                        <thead>
-                       <form method="post" action="{{ route('post.update', $post) }}" enctype="multipart/form-data">
+                       <form method="post" action="{{ route('posts.update', $post) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
