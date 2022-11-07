@@ -105,11 +105,11 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $file=File::find("$post->file_id");
+       
         $user=User::find("$post->author_id");
         return view("post.show", [
             'post' => $post,
-            'file' => $file,
+            'file' => $post->file(),
             'user' => $user
         ]);
     }
