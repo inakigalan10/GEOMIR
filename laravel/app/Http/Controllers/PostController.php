@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\File;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -50,49 +51,35 @@ class PostController extends Controller
             'longitude'=>'required',
             
         ]);
-          // Obtenir dades del fitxer
-          $upload = $request->file('upload');
-          $fileName = $upload->getClientOriginalName();
-          $fileSize = $upload->getSize();
-          $body = $request->get('body');
-          $latitude=$request->get('latitude');
-          $longitude=$request->get('longitude');
-          \Log::debug("Storing file '{$fileName}' ($fileSize)...");
+         // Obtenir dades del formulari
+        $body          = $request->get('body');
+        $upload        = $request->file('upload');
+        $latitude      = $request->get('latitude');
+        $longitude     = $request->get('longitude');
           
-        // Pujar fitxer al disc dur
-        $uploadName = time() . '_' . $fileName;
-        $filePath = $upload->storeAs(
-            'uploads',      // Path
-            $uploadName ,   // Filename
-            'public'        // Disk
-        );
-       
-        if (\Storage::disk('public')->exists($filePath)) {
-            \Log::debug("Local storage OK");
-            $fullPath = \Storage::disk('public')->path($filePath);
-            \Log::debug("File saved at {$fullPath}");
-            // Desar dades a BD
-            $file = File::create([
-                'filepath' => $filePath,
-                'filesize' => $fileSize,
-            ]);
-            $post = Post::create([
-                'body' =>$body,
-                'file_id'=>$file->id,
-                'latitude'=>$latitude,
-                'longitude'=>$longitude,
-                'author_id'=>auth()->user()->id,
-            ]);
-            \Log::debug("DB storage OK");
-            // Patró PRG amb missatge d'èxit
-            return redirect()->route('post.show', $post)
-                ->with('success', 'Post successfully saved');
-        } else {
-            \Log::debug("Local storage FAILS");
-            // Patró PRG amb missatge d'error
-            return redirect()->route("posts.create")
-                ->with('error', 'ERROR uploading posts');
-        }
+       // Desar fitxer al disc i inserir dades a BD
+       $file = new File();
+       $fileOk = $file->diskSave($upload);
+
+       if ($fileOk) {
+           // Desar dades a BD
+           Log::debug("Saving post at DB...");
+           $post = Post::create([
+               'body'      => $body,
+               'file_id'   => $file->id,
+               'latitude'  => $latitude,
+               'longitude' => $longitude,
+               'author_id' => auth()->user()->id,
+           ]);
+           Log::debug("DB storage OK");
+           // Patró PRG amb missatge d'èxit
+           return redirect()->route('posts.show', $post)
+               ->with('success', __('Post successfully saved'));
+       } else {
+           // Patró PRG amb missatge d'error
+           return redirect()->route("posts.create")
+               ->with('error', __('ERROR Uploading file'));
+       }
         
        
     }
@@ -106,11 +93,11 @@ class PostController extends Controller
     public function show(Post $post)
     {
        
-        $user=User::find("$post->author_id");
+        
         return view("post.show", [
             'post' => $post,
-            'file' => $post->file(),
-            'user' => $user
+            'file' => $post->file,
+            'user' => $post->user,
         ]);
     }
 
@@ -122,10 +109,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $file=File::find("$post->file_id");
+        
         return view("post.edit", [
             'post' => $post,
-            'file' => $file,   
+            'file' => $post->file,   
         ]);
     }
 
@@ -145,51 +132,28 @@ class PostController extends Controller
             'longitude'=>'required',
             
         ]);
-        $file=File::find($post->file_id);
-         // Obtenir dades del fitxer
-         $upload = $request->file('upload');
-         $control = false;
-        if(! is_null($upload)){
-            $fileName = $upload->getClientOriginalName();
-            $fileSize = $upload->getSize();
-            \Log::debug("Storing file '{$fileName}' ($fileSize)...");
-            // Pujar fitxer al disc dur
-            $uploadName = time() . '_' . $fileName;
-            $filePath = $upload->storeAs(
-                'uploads',      // Path
-                $uploadName ,   // Filename
-                'public'        // Disk
-            );
-        }else{
-            $filePath = $file->filepath;
-            $fileSize = $file->filesize;
-            $control = true;
-        }
-        if (\Storage::disk('public')->exists($filePath)) {
-            if(!$control){
-            \Storage::disk('public')->delete($file->filepath);
-            \Log::debug("Local storage OK");
-            $fullPath = \Storage::disk('public')->path($filePath);
-            \Log::debug("File saved at {$fullPath}");
-            }
-            // Desar dades a BD
-            $file -> filePath = $filePath;
-            $file -> fileSize = $fileSize;
-            $file->save();
-            $post->body = $request->input('body');
-            $post->latitude = $request->input('latitude');
-            $post->longitude = $request->input('longitude');
-            $post->save();
-            \Log::debug("DB storage OK");
+        // Obtenir dades del formulari
+        $body      = $request->get('body');
+        $upload    = $request->file('upload');
+        $latitude  = $request->get('latitude');
+        $longitude = $request->get('longitude');
 
+        // Desar fitxer (opcional)
+        if (is_null($upload) || $post->file->diskSave($upload)) {
+            // Actualitzar dades a BD
+            Log::debug("Updating DB...");
+            $post->body      = $body;
+            $post->latitude  = $latitude;
+            $post->longitude = $longitude;
+            $post->save();
+            Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
-            return redirect()->route('posts.index', $post)
-                ->with('success', 'Post successfully updated');
+            return redirect()->route('posts.show', $post)
+                ->with('success', __('Post successfully saved'));
         } else {
-            \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
-            return redirect()->route("posts.update")
-                ->with('error', 'ERROR updating Post');
+            return redirect()->route("posts.edit")
+                ->with('error', __('ERROR Uploading file'));
         }
         }
 
@@ -202,25 +166,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $file=File::find("$post->file_id");
-        
-        \Storage::disk('public')->delete($post->id);
+        // Eliminar post de BD
         $post->delete();
-
-
-        \Storage::disk('public')->delete($file->filepath);
-        $file->delete();
-
-         if (\Storage::disk('public')->exists($post->id)) {
-            \Log::debug("Local storage OK");
-            
-            return redirect()->route('posts.show', $post)
-                ->with('error', 'Error post alredy exist');
-        } else {
-            \Log::debug("Post Delete");
-            // Patró PRG amb missatge d'error
-            return redirect()->route("posts.index")
-                ->with('succes', 'Post Deleted');
-        }
+        // Eliminar fitxer associat del disc i BD
+        $post->file->diskDelete();
+        // Patró PRG amb missatge d'èxit
+        return redirect()->route("posts.index")
+            ->with('success', __('Post successfully deleted'));
+        
     }
 }

@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = [
+        'body',
+        'file_id',
+        'latitude',
+        'longitude',
+        'author_id'
+    ];
     public function file()
     {
         return $this->belongsTo(File::class);
