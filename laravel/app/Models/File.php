@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+
 
 class File extends Model
 {
