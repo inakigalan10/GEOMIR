@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class User extends Authenticatable
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+
+    use CrudTrait;
     use HasApiTokens, HasFactory, Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -29,7 +33,7 @@ class User extends Authenticatable
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
-     */
+     **/
     protected $hidden = [
         'password',
         'remember_token',
@@ -45,18 +49,14 @@ class User extends Authenticatable
     ];
 
     public function places(){
-        return $this->hasMany(Place::class);
+        return $this->hasMany(Place::class, 'author_id');
     }
-    
     public function posts()
     {
-        return $this->hasMany(Post::class);
-    }
+    return $this->hasMany(Post::class, 'author_id');
+    }	
 
-    public function author()
-    {
-        return $this->belongsTo(User::class);
-    }
-     
+
+    public $guard_name = 'web';
 
 }

@@ -31,20 +31,22 @@ Route::get('/dashboard', function () {
 
 Route::get('mail/test', [MailController::class, 'test']);
 
-        
+
 Route::resource('files', FileController::class)
-        ->middleware(['auth', 'role.any:3,2']);
+        ->middleware(['auth', 'permission:files']);
+
 
 Route::resource('posts', PostController::class)
-        ->middleware(['auth', 'role.any:3,2']);
+        ->middleware(['auth', 'permission:post']);
 
 Route::resource('places', PlaceController::class)
-        ->middleware(['auth', 'role.any:3,2']);
-
-// ...
+        ->middleware(['auth', 'permission:place']);
+        // ...
 
 require __DIR__.'/auth.php';
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/language/{locale}',[App\Http\Controllers\LanguageController::class, 'language']);

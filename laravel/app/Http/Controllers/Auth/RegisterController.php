@@ -70,14 +70,13 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role_id' => 1,
+            
         ]);
        
-        event(new Registered($user));
-       
-        Auth::login($user);
+        $user->assignRole('author');
 
-       
+        event(new Registered($user));
+              
         $user->sendEmailVerificationNotification();
 
         return $user;

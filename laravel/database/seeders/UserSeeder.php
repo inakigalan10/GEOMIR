@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
            'name'      => config('admin.name'),
            'email'     => config('admin.email'),
            'password'  => Hash::make(config('admin.password')),
+
        ]);
        $admin->save();
    }
