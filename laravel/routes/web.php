@@ -37,10 +37,10 @@ Route::resource('files', FileController::class)
 
 
 Route::resource('posts', PostController::class)
-        ->middleware(['auth', 'permission:post']);
+        ->middleware(['auth', 'permission:posts']);
 
 Route::resource('places', PlaceController::class)
-        ->middleware(['auth', 'permission:place']);
+        ->middleware(['auth', 'permission:places']); 
         // ...
 
 require __DIR__.'/auth.php';
