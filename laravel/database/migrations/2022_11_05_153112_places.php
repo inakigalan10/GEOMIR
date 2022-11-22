@@ -22,9 +22,9 @@ return new class extends Migration
             $table->float('latitude');
             $table->float('longitude');
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('category');
+            //$table->foreign('category_id')->references('id')->on('category');
             $table->unsignedBigInteger('visibility_id')->nullable();
-            $table->foreign('visibility_id')->references('id')->on('visibility');
+            //$table->foreign('visibility_id')->references('id')->on('visibility');
             $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')->references('id')->on('users');
             $table->timestamp('created_at')->nullable();

@@ -18,10 +18,8 @@ return new class extends Migration
             $table->primary('id');
             $table->string('name')->unique();
         });
-        Schema::table ('users', function (Blueprint $table){
-            $table->unsignedBigInteger('role_id')->nullable();
-            $table->foreign('role_id')->references('id')->on('roles');
-        });
+       
+        
         Artisan::call('db:seed', [
             '--class' => 'RoleSeeder',
             '--force' => true

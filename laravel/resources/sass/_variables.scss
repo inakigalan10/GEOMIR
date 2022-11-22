@@ -1,7 +1,37 @@
-// Body
-$body-bg: #f8fafc;
-
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+$primary:#ffee32;
+$secondary:#d6d6d6;;
+
+$black:#202020;
+$body-bg:$black;
+
+
+
+.car-header{
+ background-color: none;
+
+}
+#email, #password{
+    background-color: white;
+    color: $black;
+    box-shadow: none;
+    border-color: 1px solid $black;
+
+}
+.navbar{
+    background-color: green;
+    
+
+}
+.navbar-brand a{
+    color: $primary;
+}
+.container{
+    display: flex;
+    justify-content: flex-end;
+}
+$bs-card-bg:$primary

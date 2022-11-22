@@ -18,8 +18,8 @@ class RoleSeeder extends Seeder
     public function run()
     {
          $roles=[
-             ['id'=> '1','name' => 'author'],
-             ['id'=>'2','name'=>'editor'],
+            ['id'=> '1','name' => 'author'],
+            ['id'=>'2','name'=>'editor'],
             ['id'=>'3','name'=>'admin']
          ];
          DB::table('roles')->insert($roles);
