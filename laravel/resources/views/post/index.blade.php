@@ -11,7 +11,7 @@
                        <thead>
                            <tr>
                                <td scope="col">ID</td>
-                               <td scope="col">body</td>
+                               <td scope="col">BODY</td>
                                <td scope="col">file_id</td>
                                <td scope="col">latitude</td>
                                <td scope="col">longitude</td>
