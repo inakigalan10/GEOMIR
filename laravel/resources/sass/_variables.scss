@@ -5,7 +5,7 @@ $line-height-base: 1.6;
 
 $primary:#ffee32;
 $secondary:#d6d6d6;;
-
+$lightblack:#333533;
 $black:#202020;
 $body-bg:$black;
 
@@ -23,15 +23,62 @@ $body-bg:$black;
 
 }
 .navbar{
-    background-color: green;
+    background-color: none;
+    color: $primary;
     
 
 }
-.navbar-brand a{
+.nav-link a{
     color: $primary;
 }
-.container{
+
+
+.prueba {
     display: flex;
-    justify-content: flex-end;
+    height: 100%;
 }
-$bs-card-bg:$primary
+.cajaizq {
+    width: 50%;
+    height: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.cajaizq img {
+    width: 80%;
+    height: 100%;
+   border-radius: 10px;
+  
+}
+.cajader{
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-right: 5%;
+    padding-top: 15%;
+    background-color: $lightblack;
+    width: 50%;
+    border-radius: 10px;
+    height: 1000px;
+
+}
+.login{
+    background-color: $secondary;
+    border-radius: 10px;
+    border: 5px solid black;
+    padding-top: 15px;
+
+}
+.login-header{
+    padding-left: 50px;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.login-body{
+    width: 100%;
+    
+   
+}

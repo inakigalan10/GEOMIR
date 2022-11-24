@@ -1,13 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<div class="prueba">
+        <div class="cajaizq">
+        <img src="https://pbs.twimg.com/media/FF8odsNXMAMAN-i.jpg" alt="">
+        </div>
+        <div class="cajader">
+            <div class="login">
 
-                <div class="card-body">
+            <div class="login-header">{{ __('Login') }}</div>
+            <hr>
+                <div class="login-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -65,9 +68,13 @@
                             </div>
                         </div>
                     </form>
+                
                 </div>
+
+
             </div>
+            
+                
         </div>
-    </div>
 </div>
 @endsection
