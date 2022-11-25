@@ -11,7 +11,8 @@ form.addEventListener("submit", function( event ) {
    // Create validation
    let data = {
        "upload": document.getElementsByName("upload")[0].value,
-   }
+        
+    }
    let rules = {
        "upload": "required",
    }
