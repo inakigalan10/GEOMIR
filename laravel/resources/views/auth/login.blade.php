@@ -2,10 +2,17 @@
 
 @section('content')
 <div class="prueba">
+<<<<<<< Updated upstream
         <div class="cajaizq">
         <img src="https://pbs.twimg.com/media/FF8odsNXMAMAN-i.jpg" alt="">
         </div>
         <div class="cajader">
+=======
+        <div class="cajaimg">
+        <img src="https://media.istockphoto.com/id/930824730/es/foto/machu-picchu-per%C3%BA.jpg?s=612x612&w=0&k=20&c=w05Wt9EcVHI1W4B_pem-tlnzRVmzi1jBlXjNLoTvg4Y=" alt="">
+        </div>
+        <div class="cajalogin">
+>>>>>>> Stashed changes
             <div class="login">
 
             <div class="login-header">{{ __('Login') }}</div>

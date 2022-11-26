@@ -31,6 +31,13 @@ class Post extends Model
         {
             return $this->belongsTo(User::class);
         }
+<<<<<<< Updated upstream
+=======
+    public function visibility(){
+        return $this-> belongsTo(Visibility::class);
+    }
+    
+>>>>>>> Stashed changes
      
 
 }
