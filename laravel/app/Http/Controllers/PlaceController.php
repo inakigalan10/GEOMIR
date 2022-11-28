@@ -251,17 +251,11 @@ class PlaceController extends Controller
     public function unfavorite(Place $place){
         $id_place = $place->id;
         $id_user = auth()->user()->id;
-        $id_favorite = "SELECT id FROM places WHERE id_place = $id_place and id_user = $id_user";
+        $select = "SELECT id FROM places WHERE id_place = $id_place and id_user = $id_user";
+        $id_favorite = DB::select($select);
         $id_favorite->delete();
         return redirect()->back();
     }
 
-    public function comprobar_favorite(Place $place){
-        $id_post= $place->post_id;
-        $id_user = auth()->user()->id;
-        $select = "SELECT id FROM places WHERE id_place = $id_place and id_user = $id_user";
-        $id_favorite = DB::select($select);
-        Log::debug($select);
-        return $id_favorite;
-    }
+
 }

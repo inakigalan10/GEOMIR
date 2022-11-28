@@ -10,22 +10,23 @@
                <div class="card-body">    
                     <div class="place_head">
                         <h3>{{ $place->name }}</h3>
-                        @if(empty(comprobar_favorite($place))))
-                            <form method="post" action="{{route('place.favorite', $place)}}" enctype="multipart/form-data">
-                                @csrf      
-                                <div class ="item_post">
-                                    <button type="submit"><i class="fa-solid fa-star h4"></i></button>
-                                </div>
-                            </form>
+                        @if($place->comprobar_favorite())
+                        <form method="post" action="{{route('place.favorite', $place)}}" enctype="multipart/form-data">
+                            @csrf      
+                            <div class ="item_post">
+                                <button type="submit"><i class="fa-solid fa-star h5"></i></button>
+                            </div>
+                        </form>
                         @else
-                            <form method="delete" action="" enctype="multipart/form-data">
-                                @csrf      
-                                <div class ="item_post">
-                                    <button type="submit"><i class="fa-solid fa-star"></i></button>
-                                </div>
-                            </form>
+                        <form method="post" action="{{route('place.unfavorite', $place)}}" enctype="multipart/form-data">
+                            @method('DELETE')
+                            @csrf      
+                            <div class ="item_post">
+                                <button type="submit"><i class="fa-solid fa-star"></i></button>
+                            </div>
+                        </form>
                         @endif
-                        </div>
+                    </div>
                     <p>{{ $place->latitude }} {{ $place->longitude }}</p>
                         <div class="contenedor_imagenes">
                             <div>
