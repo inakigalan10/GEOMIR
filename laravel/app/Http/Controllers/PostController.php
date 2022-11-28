@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use App\Models\File;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     /**
@@ -19,7 +21,9 @@ class PostController extends Controller
     public function index()
     {
         return view("post.index", [
-            "posts" => Post::all()
+            "posts" =>Post::all(),
+            "files"=>File::all(),
+           
         ]);
  
     }
@@ -32,6 +36,7 @@ class PostController extends Controller
     public function create()
     {
         return view("post.create");
+        
 
     } 
 
@@ -49,6 +54,7 @@ class PostController extends Controller
             'body'=>'required',
             'latitude'=>'required',
             'longitude'=>'required',
+            'visibility'=>'required',
             
         ]);
          // Obtenir dades del formulari
@@ -56,6 +62,7 @@ class PostController extends Controller
         $upload        = $request->file('upload');
         $latitude      = $request->get('latitude');
         $longitude     = $request->get('longitude');
+        $visibility     = $request->get('visibility');
           
        // Desar fitxer al disc i inserir dades a BD
        $file = new File();
@@ -69,16 +76,15 @@ class PostController extends Controller
                'file_id'   => $file->id,
                'latitude'  => $latitude,
                'longitude' => $longitude,
+               'visibility_id'=>$visibility,
                'author_id' => auth()->user()->id,
            ]);
            Log::debug("DB storage OK");
            // Patró PRG amb missatge d'èxit
-           return redirect()->route('posts.show', $post)
-               ->with('success', __('Post successfully saved'));
+           return redirect()->route('posts.index');
        } else {
            // Patró PRG amb missatge d'error
-           return redirect()->route("posts.create")
-               ->with('error', __('ERROR Uploading file'));
+           return redirect()->route("posts.create");
        }
         
        
@@ -94,11 +100,13 @@ class PostController extends Controller
     {
        
         
-        return view("post.show", [
-            'post' => $post,
-            'file' => $post->file,
-            'user' => $post->user,
-        ]);
+        if(auth()->user()->id == $post->author_id){
+            return view("post.show", [
+                'post' => $post,
+                'file' => $post->file,
+                'user' => $post->user,
+            ]);
+        }
     }
 
     /**
@@ -109,11 +117,16 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        
-        return view("post.edit", [
-            'post' => $post,
-            'file' => $post->file,   
+        if(auth()->user()->id == $post->author_id){
+            $file=File::find($post->file_id);
+            return view("post.edit", [
+                'post' => $post,
+                'file' => $file,
+                
         ]);
+        }else {
+            return abort('403');
+        }
     }
 
     /**
@@ -125,35 +138,43 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $validatedData = $request->validate([
-            'upload' => 'required|mimes:gif,jpeg,jpg,png,mp4|max:1024',
-            'body'=>'required',
-            'latitude'=>'required',
-            'longitude'=>'required',
+        
+        if(auth()->user()->id == $post->author_id){
+            $validatedData = $request->validate([
+                'upload' => 'required|mimes:gif,jpeg,jpg,png,mp4|max:1024',
+                'body'=>'required',
+                'latitude'=>'required',
+                'longitude'=>'required',
+                'visibility'=>'required',
             
-        ]);
-        // Obtenir dades del formulari
-        $body      = $request->get('body');
-        $upload    = $request->file('upload');
-        $latitude  = $request->get('latitude');
-        $longitude = $request->get('longitude');
 
-        // Desar fitxer (opcional)
-        if (is_null($upload) || $post->file->diskSave($upload)) {
-            // Actualitzar dades a BD
-            Log::debug("Updating DB...");
-            $post->body      = $body;
-            $post->latitude  = $latitude;
-            $post->longitude = $longitude;
-            $post->save();
-            Log::debug("DB storage OK");
-            // Patró PRG amb missatge d'èxit
-            return redirect()->route('posts.show', $post)
-                ->with('success', __('Post successfully saved'));
-        } else {
-            // Patró PRG amb missatge d'error
-            return redirect()->route("posts.edit")
-                ->with('error', __('ERROR Uploading file'));
+                
+            ]);
+            // Obtenir dades del formulari
+            $body       = $request->get('body');
+            $upload     = $request->file('upload');
+            $latitude   = $request->get('latitude');
+            $longitude  = $request->get('longitude');
+            $visibility = $request->get('visibility');
+            
+
+            // Desar fitxer (opcional)
+            if (is_null($upload) || $post->file->diskSave($upload)) {
+                // Actualitzar dades a BD
+                Log::debug("Updating DB...");
+                $post->body      = $body;
+                $post->latitude  = $latitude;
+                $post->longitude = $longitude;
+                $post ->visibility = $visibility;
+                
+                $post->save();
+                Log::debug("DB storage OK");
+                // Patró PRG amb missatge d'èxit
+                return redirect()->route('posts.show', $post);
+            } else {
+                // Patró PRG amb missatge d'error
+                return redirect()->route("posts.edit");
+            }
         }
         }
 
@@ -166,13 +187,38 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        // Eliminar post de BD
-        $post->delete();
-        // Eliminar fitxer associat del disc i BD
-        $post->file->diskDelete();
-        // Patró PRG amb missatge d'èxit
-        return redirect()->route("posts.index")
-            ->with('success', __('Post successfully deleted'));
+        
+        if(auth()->user()->id == $post->author_id){
+            // Eliminar post de BD
+            $post->delete();
+            // Eliminar fitxer associat del disc i BD
+            $post->file->diskDelete();
+            // Patró PRG amb missatge d'èxit
+            return redirect()->route("posts.index");
+        }else{
+            return abort('403');
+        }
         
     }
+    public function like(Post $post){
+        // Desar dades a BD
+        Log::debug("Saving like at DB...");
+        $like = Like::create([
+            'id_post'=>$post->id,
+            'id_user' => auth()->user()->id,
+        ]);
+        Log::debug("DB storage OK");
+        // Patró PRG amb missatge d'èxit
+        return redirect()->back();
+        
+    }
+
+    public function unlike(Post $post, Like $like){
+        
+      DB::table('likes')->where(['id_user' => Auth::id(), 'id_post'=> $post->id])->delete();
+      return redirect()->back();
+    }
+    
+    
 }
+

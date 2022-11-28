@@ -11,6 +11,7 @@
     <script src="https://kit.fontawesome.com/7545c6f6db.js" crossorigin="anonymous"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <script src="https://kit.fontawesome.com/8a1b7bbcda.js" crossorigin="anonymous"></script>
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
@@ -18,7 +19,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light  shadow-sm">
+        <nav class="navbar navbar-expand-md">
             <div class="container">
                 <a class="navbar-brand text" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

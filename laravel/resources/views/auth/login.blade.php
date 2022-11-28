@@ -2,10 +2,8 @@
 
 @section('content')
 <div class="prueba">
-        <div class="cajaizq">
-        <img src="https://img.freepik.com/vector-premium/mapa-punto-ubicacion-destino_34645-957.jpg?w=2000" alt="">
-        </div>
-        <div class="cajader">
+        
+        <div class="cajalogin">
             <div class="login">
 
             <div class="login-header">{{ __('Login') }}</div>

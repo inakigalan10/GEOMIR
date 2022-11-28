@@ -33,6 +33,9 @@ class Place extends Model
     public function author(){
         return $this->belongsTo(User::class);
     }
+    public function visibility(){
+        return $this-> belongsTo(Visibility::class);
+    }
 
     public function favorited(){
         return $this->belongsToMany(User::class, 'favorites');
