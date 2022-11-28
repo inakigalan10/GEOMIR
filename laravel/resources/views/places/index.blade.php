@@ -10,6 +10,10 @@
                <div class="card-body">    
                     <div class="place_head">
                         <h3>{{ $place->name }}</h3>
+                        <div class="con_icono_place">
+                        <div class="contador_fav">
+                                <p>{{$place->contador_fav()}}</p>
+                        </div>
                         @if($place->comprobar_favorite())
                         <form method="post" action="{{route('place.favorite', $place)}}" enctype="multipart/form-data">
                             @csrf      
@@ -26,6 +30,7 @@
                             </div>
                         </form>
                         @endif
+                    </div>
                     </div>
                     <p>{{ $place->latitude }} {{ $place->longitude }}</p>
                         <div class="contenedor_imagenes">

@@ -45,5 +45,7 @@ class Place extends Model
         $id_favorite = DB::select($select);
         return empty($id_favorite);
     }
-
+    public function contador_fav(){
+        return DB::table('favorites')->where(['id_place' => $this->id])->count();
+    }
 }

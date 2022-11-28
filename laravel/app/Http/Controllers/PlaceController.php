@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class PlaceController extends Controller
 {
@@ -249,13 +251,9 @@ class PlaceController extends Controller
     }
 
     public function unfavorite(Place $place){
-        $id_place = $place->id;
-        $id_user = auth()->user()->id;
-        $select = "SELECT id FROM places WHERE id_place = $id_place and id_user = $id_user";
-        $id_favorite = DB::select($select);
-        $id_favorite->delete();
+
+        DB::table('favorites')->where(['id_user' => Auth::id(), 'id_place' => $place->id])->delete();
         return redirect()->back();
     }
-
 
 }
