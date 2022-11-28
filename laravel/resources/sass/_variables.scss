@@ -8,6 +8,7 @@ $secondary:#d6d6d6;;
 $lightblack:#333533;
 $black:#202020;
 $body-bg:$black;
+$naranja: #FFD100;
 
 
 
@@ -44,13 +45,13 @@ $body-bg:$black;
     display: flex;
     align-items: center;
     justify-content: center;
- background-color: green;
+    background-color: green;
 }
 .cajaizq img {
     width: 80%;
     height: 50%;
     padding-top: 50px;
-   border-radius: 10px;
+    border-radius: 10px;
   
 }
 .cajader{
@@ -82,7 +83,65 @@ $body-bg:$black;
 }
 
 .login-body{
-    width: 100%;
-    
-   
+    width: 100%;  
+}
+
+
+.card_place{
+    margin-bottom: 10px;
+    border: 1px solid $naranja;
+    border-radius: 15px;
+    background-color: $lightblack;
+    display: flex;
+    justify-content: center;
+}
+
+.card-body h3{
+    color: $secondary;
+
+}
+.card-body p {
+    color: $secondary;
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.contenedor_imagenes{
+    margin: 5px;
+    border: 1px solid $naranja;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.contenedor_imagenes div{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.contenedor_imagenes div img{
+    height: 20vh;
+    width: 20vh
+}
+.btn_show{
+    margin: 10px;
+    display: flex;
+    justify-content: right;
+}
+
+.fa-solid{
+    color: $naranja;
+}
+
+.place_head{
+    display:flex;
+    flex: row;
+    justify-content: space-between;
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.item_post button {
+    background-color: #33353300;
+    border: $lightblack;
+    color: #FFD100;
 }
