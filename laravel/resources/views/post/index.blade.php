@@ -41,8 +41,30 @@
                             @endforeach                                          
                         </div>
                         <div class="info_post">
-                            <div class ="item_post">
-                                <button><i class="fa-regular fa-heart"></i></button></div>
+                        <div class ="cont_icono_post">
+                        <div>
+                            <p>{{$post->contador_like()}}</p>
+                        </div>
+                            @if($post->comprobar_like())
+                            <form action="{{route('post.like', $post)}}" method="post" enctype="multipart/form-data">
+                                @csrf       
+                                <div class ="item_post">
+                                    <button type="submit" >
+                                        
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            @else
+                            <form action="{{route('post.unlike', $post)}}" method="post" enctype="multipart/form-data">
+                                @method('DELETE')
+                                @csrf       
+                                <div class ="item_post">
+                                    <button type="submit" > <i class="fa-solid fa-heart"></i> </button>
+                                </div>
+                            </form>
+                            @endif
+                            </div>
                             <div class ="item_post"><button><i class="fa-solid fa-comment"></i></button></a></div>
                             <div class="item_post"><button><i class="fa-solid fa-share-nodes"></i></button></div>
                         </div>

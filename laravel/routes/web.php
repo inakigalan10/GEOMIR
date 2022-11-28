@@ -51,9 +51,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/language/{locale}',[App\Http\Controllers\LanguageController::class, 'language']);
 
-Route::post('/posts/{post}/likes',[App\Http\Controllers\PostController::class, 'like']);
+Route::post('/posts/{post}/likes',[App\Http\Controllers\PostController::class, 'like'])->name('post.like');
 
-Route::delete('/posts/{post}/likes',[App\Http\Controllers\PostController::class, 'unlike']);
+Route::delete('/posts/{post}/likes',[App\Http\Controllers\PostController::class, 'unlike'])-> name('post.unlike');
 
 
 

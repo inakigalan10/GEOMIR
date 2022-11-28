@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use App\Models\File;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     /**
@@ -143,13 +145,18 @@ class PostController extends Controller
                 'body'=>'required',
                 'latitude'=>'required',
                 'longitude'=>'required',
+                'visibility'=>'required',
+            
+
                 
             ]);
             // Obtenir dades del formulari
-            $body      = $request->get('body');
-            $upload    = $request->file('upload');
-            $latitude  = $request->get('latitude');
-            $longitude = $request->get('longitude');
+            $body       = $request->get('body');
+            $upload     = $request->file('upload');
+            $latitude   = $request->get('latitude');
+            $longitude  = $request->get('longitude');
+            $visibility = $request->get('visibility');
+            
 
             // Desar fitxer (opcional)
             if (is_null($upload) || $post->file->diskSave($upload)) {
@@ -158,6 +165,8 @@ class PostController extends Controller
                 $post->body      = $body;
                 $post->latitude  = $latitude;
                 $post->longitude = $longitude;
+                $post ->visibility = $visibility;
+                
                 $post->save();
                 Log::debug("DB storage OK");
                 // Patró PRG amb missatge d'èxit
@@ -191,30 +200,25 @@ class PostController extends Controller
         }
         
     }
-    public function like(Post $post, Like $like){
+    public function like(Post $post){
         // Desar dades a BD
         Log::debug("Saving like at DB...");
         $like = Like::create([
-            'id_post'=>$post->post_id,
+            'id_post'=>$post->id,
             'id_user' => auth()->user()->id,
         ]);
         Log::debug("DB storage OK");
         // Patró PRG amb missatge d'èxit
-        return redirect()->route('posts.index');
+        return redirect()->back();
         
     }
 
     public function unlike(Post $post, Like $like){
         
-        $id_like = comprobar_like();
-        $id_like->delete();
+      DB::table('likes')->where(['id_user' => Auth::id(), 'id_post'=> $post->id])->delete();
+      return redirect()->back();
     }
     
-    public function comprobar_like (){
-        $id_post= $post->post_id;
-        $id_user = auth()->user()->id;
-        $id_like = "SELECT id FROM likes WHERE id_post = $id_post and id_user = $id_user";
-        return $id_like;
-    }
+    
 }
 
