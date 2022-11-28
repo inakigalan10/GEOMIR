@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Visibility extends Model
+class Like extends Model
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
-
-
+    protected $table ='likes';
+    
     protected $fillable = [
-        'name',
+        'id_post',
+        'id_user'
+
     ];
 }

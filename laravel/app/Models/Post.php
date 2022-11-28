@@ -15,7 +15,8 @@ class Post extends Model
         'file_id',
         'latitude',
         'longitude',
-        'author_id'
+        'author_id',
+        'visibility_id'
     ];
     public function file()
     {
@@ -28,16 +29,18 @@ class Post extends Model
         return $this->belongsTo(User::class, 'author_id');
         }
     public function author()
-        {
-            return $this->belongsTo(User::class);
-        }
-<<<<<<< Updated upstream
-=======
-    public function visibility(){
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function visibility()
+    {
         return $this-> belongsTo(Visibility::class);
     }
-    
->>>>>>> Stashed changes
+    public function liked()
+    {
+        return $this->belongsToMany(User::class, 'likes');
+    }
+
      
 
 }

@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('visibilities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
+        Schema::table('favorites', function (Blueprint $table) {
+            $table->timestamps();
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visibilities');
+        //
     }
 };

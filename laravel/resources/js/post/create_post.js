@@ -14,16 +14,17 @@ form.addEventListener("submit", function( event ) {
    // Create validation
    let data = {
        "upload": document.getElementsByName("upload")[0].value,
-       "body": document.getElementsByName("body")[0].value,
        "latitude": document.getElementsByName("latitude")[0].value,
        "longitude": document.getElementsByName("longitude")[0].value,
-       
+       "visibility": document.getElementsByName("visibility")[0].value,
+       "body": document.getElementsByName("body")[0].value,
     }
    let rules = {
        "upload": "required",
-       "body": "required",
        "latitude": "required",
        "longitude": "required",
+       "visibility": "required",
+       "body": "required",
    }
    let validation = new Validator(data, rules)
    // Validate fields
