@@ -1,7 +1,10 @@
 @extends('layouts.app')
  
 @section('content')
-<a class="btn btn-primary" href="{{ route('places.create') }}" role="button">Add new place</a>
+
+@include('partials.menu')
+
+
 @foreach ($places as $place)
 <div class="container">
    <div class="row justify-content-center">
@@ -57,4 +60,7 @@
    </div>
 </div>
 @endforeach
+<div class="add_btn">
+    <a href="{{ route('places.create') }}" style="text-decoration:none"><h1>+</h1></a>
+</div>
 @endsection

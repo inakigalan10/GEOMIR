@@ -13,13 +13,13 @@
             <a href="#">Mapa</a>
         </div>
         <div class="lista-item">
-            <a href="#">Lugares</a>
+            <a href="{{ url('/posts') }}">Post</a>
+        </div>
+        <div class="lista-item">
+            <a href="{{ url('/places') }}">Lugares</a>
         </div>
         <div class="lista-item">
             <a href="#">Chat</a>
-        </div>
-        <div class="lista-item">
-            <a href="#">Notificaciones</a>
         </div>
     </div>
 </div>
