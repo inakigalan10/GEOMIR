@@ -32,10 +32,17 @@
                         <div id="vidibility" class="form-group">    
                             <label for="visibility">Visibility: </label>
                             <select class="form-group" name="visibility" id="visibility_post_add">
-                                <option value="">---------Seleciona una visiblidad para el post---------</option>
-                                <option value="1">public</option>
-                                <option value="2">contacts</option>
-                                <option value="3">private</option>
+                            @foreach(App\Models\Visibility::all() as $visibility)
+                                @if($visibility->id == $post->visibility_id)
+                                    <option value="{{ $visibility->id }}" selected>
+                                        {{ __($visibility->name) }}
+                                    </option>
+                                @else
+                                    <option value="{{ $visibility->id }}">
+                                        {{ __($visibility->name) }}
+                                    </option>
+                                @endif
+                            @endforeach
                             </select>
                             <div class="alert">  </div>
                         </div>

@@ -202,12 +202,12 @@ class PostController extends Controller
     }
     public function like(Post $post){
         // Desar dades a BD
-        Log::debug("Saving like at DB...");
+        
         $like = Like::create([
             'id_post'=>$post->id,
             'id_user' => auth()->user()->id,
         ]);
-        Log::debug("DB storage OK");
+        
         // Patró PRG amb missatge d'èxit
         return redirect()->back();
         
