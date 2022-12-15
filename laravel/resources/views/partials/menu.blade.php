@@ -4,9 +4,6 @@
     </div>
     <div class="lista-menu">
         <div class="lista-item">
-            <a href="#">Home</a>
-        </div>
-        <div class="lista-item">
             <a href="#"></i>Buscar</a>
         </div>
         <div class="lista-item">
@@ -17,6 +14,9 @@
         </div>
         <div class="lista-item">
             <a href="{{ url('/places') }}">Lugares</a>
+        </div>
+        <div class="lista-item">
+            <a href="">About As</a>
         </div>
         <div class="lista-item">
             <a href="#">Chat</a>

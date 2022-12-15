@@ -32,15 +32,12 @@ Route::get('/dashboard', function () {
 Route::get('mail/test', [MailController::class, 'test']);
 
 
-Route::resource('files', FileController::class)
-        ->middleware(['auth', 'permission:files']);
+Route::resource('files', FileController::class)->middleware(['auth', 'permission:files']);
 
 
-Route::resource('posts', PostController::class)
-        ->middleware(['auth', 'permission:posts']);
+Route::resource('posts', PostController::class)->middleware(['auth', 'permission:posts']);
 
-Route::resource('places', PlaceController::class)
-        ->middleware(['auth', 'permission:places']); 
+Route::resource('places', PlaceController::class)->middleware(['auth', 'permission:places']); 
         // ...
 
 require __DIR__.'/auth.php';
