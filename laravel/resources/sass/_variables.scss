@@ -397,3 +397,32 @@ input{
     flex: row;
     align-items: center;
 }
+
+.aboutAs{
+    margin-left: 15%;
+    margin-top: 4%;
+    display: flex;
+    justify-content: space-around;
+    
+}
+.cajaPersona{
+    width: 35%;
+    background-color: #ffd100;
+    border: 1px solid $black;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 13px 65px 0px rgba(255,255,255,0.25);
+}
+
+.imagenPersona img{
+    width: 100%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    
+}
+
+.infoPersona{
+    margin-top: 2%;
+}

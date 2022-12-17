@@ -16,7 +16,7 @@
             <a href="{{ url('/places') }}">Lugares</a>
         </div>
         <div class="lista-item">
-            <a href="">About As</a>
+            <a href="{{ url('/about_as')}}">About As</a>
         </div>
         <div class="lista-item">
             <a href="#">Chat</a>

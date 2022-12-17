@@ -25,7 +25,7 @@ trait InstallsInertiaStacks
                 '@inertiajs/inertia-vue3' => '^0.6.0',
                 '@inertiajs/progress' => '^0.2.7',
                 '@tailwindcss/forms' => '^0.5.3',
-                '@vitejs/plugin-vue' => '^3.0.0',
+                '@vitejs/plugin-vue' => '^4.0.0',
                 'autoprefixer' => '^10.4.12',
                 'postcss' => '^8.4.18',
                 'tailwindcss' => '^3.2.1',
@@ -92,7 +92,13 @@ trait InstallsInertiaStacks
             $this->installInertiaVueSsrStack();
         }
 
-        $this->runCommands(['npm install', 'npm run build']);
+        if (file_exists(base_path('pnpm-lock.yaml'))) {
+            $this->runCommands(['pnpm install', 'pnpm run build']);
+        } elseif (file_exists(base_path('yarn.lock'))) {
+            $this->runCommands(['yarn install', 'yarn run build']);
+        } else {
+            $this->runCommands(['npm install', 'npm run build']);
+        }
 
         $this->line('');
         $this->components->info('Breeze scaffolding installed successfully.');
@@ -145,7 +151,7 @@ trait InstallsInertiaStacks
                 '@inertiajs/inertia-react' => '^0.8.1',
                 '@inertiajs/progress' => '^0.2.6',
                 '@tailwindcss/forms' => '^0.5.3',
-                '@vitejs/plugin-react' => '^2.0.0',
+                '@vitejs/plugin-react' => '^3.0.0',
                 'autoprefixer' => '^10.4.12',
                 'postcss' => '^8.4.18',
                 'tailwindcss' => '^3.2.1',
@@ -219,7 +225,13 @@ trait InstallsInertiaStacks
             $this->installInertiaReactSsrStack();
         }
 
-        $this->runCommands(['npm install', 'npm run build']);
+        if (file_exists(base_path('pnpm-lock.yaml'))) {
+            $this->runCommands(['pnpm install', 'pnpm run build']);
+        } elseif (file_exists(base_path('yarn.lock'))) {
+            $this->runCommands(['yarn install', 'yarn run build']);
+        } else {
+            $this->runCommands(['npm install', 'npm run build']);
+        }
 
         $this->line('');
         $this->components->info('Breeze scaffolding installed successfully.');
