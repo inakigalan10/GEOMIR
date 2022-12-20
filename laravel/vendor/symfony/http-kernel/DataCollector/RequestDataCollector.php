@@ -36,7 +36,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
      */
     private \SplObjectStorage $controllers;
     private array $sessionUsages = [];
-    private ?RequestStack $requestStack;
+    private $requestStack;
 
     public function __construct(RequestStack $requestStack = null)
     {
@@ -44,6 +44,9 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
         $this->requestStack = $requestStack;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         // attributes are serialized and as they can be anything, they need to be converted to strings.
@@ -388,6 +391,9 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return 'request';
@@ -443,7 +449,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
                     'file' => $r->getFileName(),
                     'line' => $r->getStartLine(),
                 ];
-            } catch (\ReflectionException) {
+            } catch (\ReflectionException $e) {
                 if (\is_callable($controller)) {
                     // using __call or  __callStatic
                     return [
@@ -471,7 +477,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
             }
             $controller['method'] = $r->name;
 
-            if ($class = \PHP_VERSION_ID >= 80111 ? $r->getClosureCalledClass() : $r->getClosureScopeClass()) {
+            if ($class = $r->getClosureScopeClass()) {
                 $controller['class'] = $class->name;
             } else {
                 return $r->name;
