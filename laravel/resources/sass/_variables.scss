@@ -405,7 +405,7 @@ input{
     justify-content: space-around;
     
 }
-.cajaPersona{
+#persona1, #persona2{
     width: 35%;
     background-color: #ffd100;
     border: 1px solid $black;
@@ -414,15 +414,102 @@ input{
     flex-direction: column;
     align-items: center;
     box-shadow: 0px 13px 65px 0px rgba(255,255,255,0.25);
+    padding: 0;
 }
 
-.imagenPersona img{
+.cajaPersona:hover #puesto1::before {
+    content: 'Deporte';
+    visibility: visible;
+}
+
+.cajaPersona:hover #puesto2::before {
+    content: 'Videojuegos';
+    visibility: visible;
+    justify-self: center;
+}
+
+.cajaPersona:hover #puesto1 {
+    visibility: hidden;
+}
+
+.cajaPersona:hover #puesto2 {
+    visibility: hidden;
+}
+
+.cajaPersona:hover #img1 {
+    animation: voltear 2s linear 1;
+    animation-fill-mode: forwards;
+}
+
+.cajaPersona:hover #img2 {
+    animation: giro 2s linear 1;
+    animation-fill-mode: forwards;
+}
+
+
+
+@keyframes giro {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1080deg);
+    content: url("../imagenes/aaronDivertida.jpeg");
+    filter: grayscale(0%);
+    filter: contrast(250%);
+  }
+}
+
+
+@keyframes voltear {
+    0% {
+        transform: rotateY(0deg);
+        
+    }
+
+    100% {
+        transform: rotateY(180deg);
+        content: url("../imagenes/Rose_City_Antifa_logo.png");
+        filter: grayscale(0%);
+        filter: contrast(250%);
+    }
+
+}
+
+.imagenPersona img {
     width: 100%;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-    
+    filter: grayscale(100%);
 }
 
 .infoPersona{
+    display: flex;
     margin-top: 2%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-content {
+    width: 100%;
+    margin: 0px;
+}
+#myModal video,#myModal2 video{
+    width: 100%;
+}
+
+.carousel-control{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    }
+
+
+
+.carousel-control-next, .carousel-control-prev {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform: translateY(200%);
+    
 }

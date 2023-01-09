@@ -251,8 +251,16 @@ class PlaceController extends Controller
     }
 
     public function unfavorite(Place $place){
+<<<<<<< Updated upstream
 
         DB::table('favorites')->where(['id_user' => Auth::id(), 'id_place' => $place->id])->delete();
+=======
+        $id_place = $place->id;
+        $id_user = auth()->user()->id;
+        $select = "SELECT id FROM places WHERE id_user = $id_user and id_place = $id_place";
+        $id_favorite = DB::select($select);
+        $id_favorite->delete();
+>>>>>>> Stashed changes
         return redirect()->back();
     }
 
