@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\TokenController;
+use App\Http\Controllers\Api\PostController;
 
 
 /*
@@ -30,6 +31,10 @@ Route::post('login', [TokenController::class, 'login']);
 
 Route::post('register', [TokenController::class, 'register']);
 
+Route::apiResource('post', PostController::class);
+
+Route::post('/posts/{post}/like', [PostController::class, 'like']);
+Route::delete('/posts/{post}/like', [PostController::class, 'unlike']);
 
 Route::apiResource('files', FileController::class);
 

@@ -159,10 +159,13 @@ class FileTest extends TestCase
        // Check JSON properties
        $response->assertJson([
            "success" => true,
-           "data"    => true // any value
        ]);
+       // Check JSON dynamic values
+       $response->assertJsonPath("data",
+           fn ($data) => is_array($data)
+       );
    }
- 
+
    protected function _test_error($response)
    {
        // Check response
