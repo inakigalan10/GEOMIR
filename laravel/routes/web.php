@@ -7,6 +7,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AboutAsController;
+use App\Http\Controllers\ContactoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::resource('posts', PostController::class)->middleware(['auth', 'permission
 Route::resource('places', PlaceController::class)->middleware(['auth', 'permission:places']); 
 
 Route::resource('about_as', AboutAsController::class)->middleware(['auth']); 
+Route::resource('contacto', ContactoController::class)->middleware(['auth']); 
         // ...
 
 require __DIR__.'/auth.php';

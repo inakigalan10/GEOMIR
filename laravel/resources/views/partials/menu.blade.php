@@ -21,5 +21,8 @@
         <div class="lista-item">
             <a href="#">Chat</a>
         </div>
+            <div class="lista-item">
+            <a href="{{ url('/contacto')}}">Contactanos</a>
+        </div>
     </div>
 </div>
