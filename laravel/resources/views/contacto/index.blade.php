@@ -2,6 +2,7 @@
  
 @section('content')
 @include('partials.menu')
+    <a href="http://127.0.0.1:8000/" accesskey="F">Home</a>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
      crossorigin=""/>
@@ -43,9 +44,26 @@
 var map = L.map('map').setView([41.2312199011308, 1.7280981210849504], 13);
 var marker = L.marker([41.2312199011308, 1.7280981210849504]).addTo(map);
 marker.bindPopup("<b>Estem aqui!!<br>").closePopup();
+
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+getLocation()
+
+function showPosition(position) {
+    var markerUser = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+    markerUser.bindPopup("<b>Tu estas aqui!!<br>").closePopup();
+}
+
+
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-</script>
+</script> 
 @endsection
