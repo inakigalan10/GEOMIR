@@ -12,9 +12,9 @@
     <div id="header_contacto">
         
         <div id="txt_video_contacto">
-            <h1 class="titulo_contacto">Sección primera</h1>
-            <h2 class="subtitulo_contacto">Sección segunda</h2>
-            <h2 class="subtitulo_contacto">Sección tercera</h2>
+            <button class="button_contacte">
+                <h1>Envianos un formulario para contactarnos</h1>
+            </button>
         </div>
     </div>
     <div id="mapa_container">
@@ -31,7 +31,15 @@
                 <h2>Segueix-nos a xarxes!</h2>
             </div>
             <div id="iconos_footer_contacto">
-                <h2>Segueix-nos a xarxes!</h2>
+                <div>
+                    <i class="fa-brands fa-instagram" ></i>
+                </div>
+                <div>
+                    <i class="fa-brands fa-facebook"></i>
+                </div>
+                <div>
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </div>
             </div>  
         </div>
     </div>
