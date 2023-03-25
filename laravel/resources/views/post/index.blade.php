@@ -60,7 +60,7 @@
                                 @method('DELETE')
                                 @csrf       
                                 <div class ="item_post">
-                                    <button type="submit" > <i class="fa-solid fa-heart"></i> </button>
+                                    <input type="submit" > <i class="fa-solid fa-heart"></i> </imput>
                                 </div>
                             </form>
                             @endif

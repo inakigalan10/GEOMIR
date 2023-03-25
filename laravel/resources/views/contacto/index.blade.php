@@ -65,5 +65,64 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
+
+// Verifica si el navegador soporta el reconocimiento de voz
+if ('webkitSpeechRecognition' in window) {
+  // Crea un objeto de reconocimiento de voz
+  const recognition = new webkitSpeechRecognition();
+  // Establece el idioma del reconocimiento de voz en español de España
+  recognition.lang = 'es-ES';
+
+  // Cuando se recibe un resultado del reconocimiento de voz
+  recognition.onresult = function(event) {
+    // Obtiene la transcripción del primer resultado
+    const result = event.results[0][0].transcript;
+    console.log(result);
+    // Si la transcripción incluye las palabras "bajar" o "abajo", hace un scroll hacia abajo
+    if (result.includes('bajar') || result.includes('abajo')) {
+      window.scrollBy(0, 100);
+    // Si la transcripción incluye las palabras "subir" o "arriba", hace un scroll hacia arriba
+    } else if (result.includes('subir') || result.includes('arriba')) {
+      window.scrollBy(0, -100);
+    // Si la transcripción incluye las palabras "ampliar", "aumentar" o "acercar", aumenta el zoom del cuerpo del documento al 150%
+    } else if (result.includes('ampliar') || result.includes('aumentar') || result.includes('acercar')) {
+      document.body.style.zoom = '150%';
+    // Si la transcripción incluye las palabras "reducir", "disminuir" o "alejar", disminuye el zoom del cuerpo del documento al 50%
+    } else if (result.includes('reducir') || result.includes('disminuir') || result.includes('alejar')) {
+      document.body.style.zoom = '50%';
+    // Si la transcripción incluye las palabras "restaurar", "inicial" o "inicio", establece el zoom del cuerpo del documento al 100% y hace scroll hasta arriba
+    } else if (result.includes('restaurar') || result.includes('inicial') || result.includes('inicio')) {
+      document.body.style.zoom = '100%';
+      window.scrollTo(0, 0);
+    }
+  }
+
+  // Cuando ocurre un error en el reconocimiento de voz
+  recognition.onerror = function(event) {
+    console.error(event.error);
+  }
+
+  // Cuando termina el reconocimiento de voz
+  recognition.onend = function() {
+    console.log('Speech recognition ended.');
+  }
+
+  // Función para iniciar el reconocimiento de voz cuando se presiona Alt + S
+  const startRecognition = function() {
+    recognition.start();
+    console.log('Speech recognition started.');
+  }
+
+  // Escucha el evento de teclado para iniciar el reconocimiento de voz cuando se presiona Alt + S
+  document.addEventListener('keydown', function(event) {
+    if (event.code === 'KeyS' && event.altKey) {
+      startRecognition();
+    }
+  });
+} else {
+  console.log('Speech recognition not supported.');
+}
+
 </script> 
 @endsection
