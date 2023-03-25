@@ -599,5 +599,24 @@ input{
 
 }
 
+.button_contacte{
+    background-color: #FFD100;
+    border: 1px solid black;
+    border-radius: 20px;
+    color: white;
+    padding:5px;
+    width: 60%;
+    margin-left: 22%;
+}
+
+#iconos_footer_contacto{
+    font-size: 200%;
+    
+    display: flex;
+}
+
+#iconos_footer_contacto div{
+    padding-left: 55px;
+}
 
 
